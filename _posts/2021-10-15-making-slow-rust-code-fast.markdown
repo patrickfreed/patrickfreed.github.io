@@ -290,7 +290,7 @@ Awesome! The average iteration time was reduced by roughly 36% from the previous
 
 Criterion includes support for generating an HTML report that summarizes the most recent run and compares it to the run before it. To access the report, simply open `target/criterion/report/index.html` in your browser.
 
-As an example, [here](/resources/making-slow-rust-code-fast/criterion/report/index.html) is the report comparing the baseline to the most optimized one. 
+As an example, [here](/resources/making-slow-rust-code-fast/criterion/find/report/index.html) is the report comparing the baseline to the most optimized one. 
 
 At the top of the report, we can see a summary of the most optimized run, including a graph illustrating the mean execution time and a scatter plot showing all the samples criterion took, as well as links to some other graphs. Here's a screenshot of that section for the most recent `find` benchmark run:
 
