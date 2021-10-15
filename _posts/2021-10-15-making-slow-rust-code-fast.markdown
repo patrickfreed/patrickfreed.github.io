@@ -2,7 +2,8 @@
 layout: post
 title:  "Making slow Rust code fast"
 date:   2021-10-15 15:10:17 -0400
-categories: rust benchmarking profiling flamegraph performance
+category: rust
+tags: [rust, benchmarking, profiling, flamegraph, performance]
 ---
 
 # Making slow Rust code fast: performance tuning using Criterion-rs and flamegraphs
@@ -188,7 +189,7 @@ cargo flamegraph --bin my-binary -o find-baseline.svg
 ```
 
 And here is the resulting flamegraph (open it in a new browser tab to explore):
-![](resources/making-slow-rust-code-fast/find-baseline.svg)
+![](/resources/making-slow-rust-code-fast/find-baseline.svg)
 
 Now that we can see where the time is being spent, it's time to dig in and see if we can find the bottlenecks.
 
@@ -196,7 +197,7 @@ Now that we can see where the time is being spent, it's time to dig in and see i
 
 The stacks in flamegraphs start at the bottom and move upwards as the call stack deepens (left vs right is arbitrary), and generally that's the best way to start reading them. Looking at the bottom of the above flamegraph, the widest rectangles are `Future::poll`, but that's not because Rust futures are super slow--it's because every `.await` involves polling futures. With that in mind, we can skip up from any `poll` rectangles until we can get to functions within `mongodb` to see the information we care about. The following annotated version of the flamegraph highlights the sections of note:
 
-![](resources/making-slow-rust-code-fast/flamegraph-annotated.png)
+![](/resources/making-slow-rust-code-fast/flamegraph-annotated.png)
 
 The blue square contains the time spent in the calls to `CommandResponse::body`, and it shows that nearly all of that time is spent in `clone()`. The various purple rectangles correspond to the time spent parsing BSON (the binary format used by MongoDB) into `Document`s, and the green rectangle corresponds to the time spent in `Document`'s `serde::Deserialize` implementation. Lastly, the dotted black rectangle corresponds to the time spent releasing memory, and the solid black one corresponds to the time spent serializing commands to BSON.
 
@@ -289,15 +290,15 @@ Awesome! The average iteration time was reduced by roughly 36% from the previous
 
 Criterion includes support for generating an HTML report that summarizes the most recent run and compares it to the run before it. To access the report, simply open `target/criterion/report/index.html` in your browser.
 
-As an example, [here](resources/making-slow-rust-code-fast/criterion/report/index.html) is the report comparing the baseline to the most optimized one. 
+As an example, [here](/resources/making-slow-rust-code-fast/criterion/report/index.html) is the report comparing the baseline to the most optimized one. 
 
 At the top of the report, we can see a summary of the most optimized run, including a graph illustrating the mean execution time and a scatter plot showing all the samples criterion took, as well as links to some other graphs. Here's a screenshot of that section for the most recent `find` benchmark run:
 
-![](resources/making-slow-rust-code-fast/report-summary.png)
+![](/resources/making-slow-rust-code-fast/report-summary.png)
 
 At the bottom of the report, there is a comparison between the two most recent runs, with the older run (the baseline) in red and the more recent run (the optimized one) in blue. A screenshot of the section comparing the optimized version of `mongodb` to the unoptimized baseline can be found below. In it, we can see that the unoptimized baseline is clearly much slower than the optimized one. Judging by the wideness of the distributions, we can also see that the optimized one is more consistent in its performance than the baseline.
 
-![](resources/making-slow-rust-code-fast/report-comparison.png)
+![](/resources/making-slow-rust-code-fast/report-comparison.png)
 
 These reports are super helpful tools for visualizing the changes that occur as a result of performance tuning, and they're especially useful for presenting the results to others. They can also serve as a record of past performance data, eliminating the need to manually record the results.
 
