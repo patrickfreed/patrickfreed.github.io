@@ -13,5 +13,7 @@ This site contains my blog, which will mostly consist of posts of varying levels
 
 _Views are my own_
 
+socials: [GitHub](https://github.com/patrickfreed) | [twitter](https://twitter.com/_patrick_freed_)
+
 ---
 
