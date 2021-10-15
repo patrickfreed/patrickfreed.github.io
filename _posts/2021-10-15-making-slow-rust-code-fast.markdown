@@ -6,7 +6,7 @@ category: rust
 tags: [rust, benchmarking, profiling, flamegraph, performance]
 ---
 
-# Making slow Rust code fast: performance tuning using Criterion-rs and flamegraphs
+# Performance tuning using Criterion-rs and flamegraphs
 
 Performance is one of the top reasons developers choose Rust for their applications. In fact, it's the first reason listed under the ["Why Rust?"](https://www.rust-lang.org/#:~:text=Version%201.55.0-,Why%20Rust%3F,-Performance) section on the rust-lang.org homepage, even before memory safety. This is for good reason too--many benchmarks show that software written in Rust _is_ fast, sometimes even the [_fastest_](https://www.techempower.com/benchmarks/#section=data-r18&hw=ph&test=fortune). This doesn't mean that everything written in Rust is guaranteed to be fast, though. In fact, it's surprisingly easy to write slow Rust code, especially when attempting to appease the borrow checker by cloning or `Arc`-ing instead of borrowing, a strategy which is generally recommended to new Rust users. That's why it's important to profile and benchmark Rust code to see where any bottlenecks are and to fix them, just like you would in any other language. In this post, I'll demonstrate some basic tools and techniques for doing so, based on my recent experience working to improve the performance of the `mongodb` crate.
 
