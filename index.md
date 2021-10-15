@@ -17,3 +17,4 @@ socials: [GitHub](https://github.com/patrickfreed) | [twitter](https://twitter.c
 
 ---
 
+## Recent Posts
