@@ -1,4 +1,10 @@
-# Unlocking greater performance in the MongoDB Rust Driver via "raw" BSON and zero copy deserialization
+---
+layout: post
+title:  "Unlocking greater performance in the MongoDB Rust Driver via "raw" BSON and zero copy deserialization"
+date:   2022-04-27 11:41:17 -0500
+category: rust
+tags: [rust, bson, mongodb, benchmarking, profiling, performance]
+---
 
 The `2.2.0` release of the Rust BSON library (the [`bson`](https://crates.io/crates/bson) crate) introduced a "raw" BSON API, which enabled us to achieve some internal performance improvements in the Rust MongoDB driver (the [`mongodb`](https://crates.io/crates/mongodb) crate) and, in some cases, can be leveraged by users to dramatically improve performance of their queries, including via the use of [`serde`](https://serde.rs/)'s zero-copy deserialization functionality. In this post, I'll demonstrate how to use this new API and provide some examples of where it can help speed up your reads.
 
