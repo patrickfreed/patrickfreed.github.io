@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Unlocking greater performance in the MongoDB Rust Driver via "raw" BSON and zero copy deserialization"
-date:   2022-04-27 11:41:17 -0500
+title: "Unlocking greater performance in the MongoDB Rust Driver via raw BSON and zero copy deserialization"
+date: 2022-04-27 11:41:17 -0500
 category: rust
 tags: [rust, bson, mongodb, benchmarking, profiling, performance]
 ---
