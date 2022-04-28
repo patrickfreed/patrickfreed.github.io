@@ -32,7 +32,7 @@ As mentioned above, `v2.2.0` of `bson` introduces the [`RawDocumentBuf`](https:/
 let mut doc = RawDocumentBuf::new();
 doc.append("a key", "a value");
 doc.append("an integer", 12i32);
-println!("{:?}", doc.get("a key")); // prints "Ok(RawBsonRef::Int32(12))"
+println!("{:?}", doc.get("a key")); // prints "Ok(Some(String("a value")))"
 
 let other = rawdoc! {
     "a key": "a value",
@@ -69,7 +69,7 @@ let mut doc = RawDocumentBuf::new();
 doc.append("key", RawBson::String("a".to_string());
 doc.append("other", rawbson!("a"));
 let s = doc.get("key")?; // gets a reference, no copy here
-println!("{:?}", s); // prints "RawBsonRef::String("a")"
+println!("{:?}", s); // prints "Some(String("a"))"
 ```
 
 The raw BSON API also contains support for borrowed deserialization via [`serde`](https://serde.rs/), which can greatly speed up populating structs from BSON by skipping expensive copies.
